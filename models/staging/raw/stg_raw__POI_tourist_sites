@@ -1,0 +1,23 @@
+with 
+
+source as (
+
+    select * from {{ source('raw', 'POI_touristic_sites_by_municipality') }}
+
+),
+
+renamed as (
+
+    select
+        poi,
+        name_reprocessed,
+        latitude,
+        longitude,
+        municipality_code,
+        importance,
+
+    from source
+
+)
+
+select * from renamed
