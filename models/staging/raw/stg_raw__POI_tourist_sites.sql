@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('raw', 'POI_touristic_sites_by_municipality') }}
+    select * from {{ source('raw', 'POI_tourist_sites') }}
 
 ),
 
@@ -14,7 +14,7 @@ renamed as (
         latitude,
         longitude,
         municipality_code,
-        importance,
+        importance
 
     from source
 

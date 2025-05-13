@@ -1,4 +1,4 @@
-# 🏠 Prello – Scoring System for Second Home Investment in France
+# 🏠 Prello – Scoring System for Second Home Investment in France (2019 for now)
 
 This project helps **Prello**, a proptech startup, strategically expand its second-home offerings by identifying the most attractive municipalities across France. Using public datasets, we’ve built a data pipeline and scoring framework to rank towns based on investment potential — factoring in tourism, real estate stress, and local economic indicators.
 
@@ -17,7 +17,7 @@ Prello can’t deploy property hunters across all of France. They need:
 
 ## 🎯 Project Goals
 
-### ✅ Iteration 1: City Scoring System
+### ✅ Iteration 1: City Scoring System (2019 until further data)
 > *Create a reproducible scoring model to rank towns based on second-home investment attractiveness.*
 
 ### 🧭 Upcoming Deliverables:
