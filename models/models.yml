@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: int_city_scores
+    description: Provides normalized scores for each municipality code based on three pillars -> tourism, real estate, and profitability
+    columns:
+      - name: municipality_code
+        description: Unique identifier for the rated municipality
+      - name: tourism_score
+        description: Min-Max scaled score based on COUNT(poi) from POI_touristic_sites which acts as a proxy for tourist appeal
+      - name: salary_score
+        description: Min-Max scaled score based on intensite_tension_immo which measures supply/demand tension
+      - name: avg_net_salary
+        description: Min-Max scaled score based on AVG(net_salary) from average_salary_by_municipality which acts as a proxy for economic opportunity
+        
