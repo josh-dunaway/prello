@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: prello
+    tables:
+      - name: POI_tourist_establishments
+        description: List of hotels, hostels, camp sites, guests houses, and beds and breakfasts (and their importance). Appears to be where tourists can stay.
+        tests:
+          - unique:
+              column_name: "(name_reprocessed||municipality_code)"
+      - name: POI_tourist_sites
+        identifier: POI_touristic_sites_by_municipality
+        description: List of tourist points of interest (everything but where to sleep) and their importance.
+        tests:
+          - unique:
+              column_name: "(name_reprocessed||municipality_code)"
+      - name: average_salary_by_municipality
+        description: Average salary per year by municipality code
+        tests:
+          - unique:
+              column_name: "(municipality_code||year)"
+      - name: geographical_referential
+        description: Information on municipality including city name, type, coordinates, department code and department name.
+        tests:
+          - unique:
+              column_name: "municipality_code"
+      - name: housing_stock
+        description: Various metrics per year by municipality code including number or principal homes, second homes, vacant houses, and their various rates.
+        tests:
+          - unique:
+              column_name: "(municipality_code||year)"        
+      - name: notary_real_estate_sales
+        description: Each row describes the sale of a property with associated characterstics of sale such as amount, address, size of property, etc..
+      - name: population_by_municipality
+        description: Population by year and municipality
+        tests:
+          - unique:
+              column_name: "(municipality_code||year)"         
+      - name: poverty_population_by_municipality
+        description: Poverty population by year and municipality
+        tests:
+          - unique:
+              column_name: "(municipality_code||year)"        
+      - name: real_estate_info_by_municipality
+        description: Min/med/max rental prices for apartments and houses per municipality - unclear of the year recorded.
+        tests:
+          - unique:
+              column_name: "municipality_code"
