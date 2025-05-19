@@ -3,7 +3,7 @@
 with tourism_kpi as (
   select 
     municipality_code,
-    count(distinct poi) as n_pois
+    sum(importance) as total_importance
   from {{ref('stg_raw__POI_tourist_sites')}}
   group by municipality_code
 ),
@@ -27,7 +27,7 @@ real_estate_kpi as (
 joined as (
   select 
     t.municipality_code,
-    t.n_pois,
+    t.total_importance,
     s.avg_net_salary,
     r.intensite_tension_immo
   from tourism_kpi t
@@ -40,7 +40,7 @@ normalized as (
     municipality_code,
     
     -- Normalized KPI scores (Min-Max Scaling)
-    (n_pois - min(n_pois) over()) / nullif(max(n_pois) over() - min(n_pois) over(), 0) as tourism_score,
+    (total_importance - min(total_importance) over()) / nullif(max(total_importance) over() - min(total_importance) over(), 0) as tourism_score,
     (avg_net_salary - min(avg_net_salary) over()) / nullif(max(avg_net_salary) over() - min(avg_net_salary) over(), 0) as salary_score,
     (intensite_tension_immo - min(intensite_tension_immo) over()) / nullif(max(intensite_tension_immo) over() - min(intensite_tension_immo) over(), 0) as tension_score
 
@@ -73,7 +73,9 @@ select
     f. prello_score,
     g.city_name,
     g.latitude,
-    g.longitude
+    g.longitude,
+    --adding row_number ranking to be used in BI tool
+    row_number() over (order by f.prello_score DESC) as ranking
 from final_score f
 left join {{ref("stg_raw__geographical_referential")}} g
 on f.municipality_code = g.municipality_code
