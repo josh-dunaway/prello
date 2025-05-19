@@ -70,6 +70,7 @@ select
     f. tourism_score,
     f.salary_score,
     f.tension_score,
+    f. prello_score,
     g.city_name,
     g.latitude,
     g.longitude
