@@ -65,7 +65,14 @@ final_score as (
   from normalized
 )
 
-select *, city_name, latitude, longitude
+select 
+    f.municipality_code,
+    f. tourism_score,
+    f.salary_score,
+    f.tension_score,
+    g.city_name,
+    g.latitude,
+    g.longitude
 from final_score f
 left join {{ref("stg_raw__geographical_referential")}} g
 on f.municipality_code = g.municipality_code
