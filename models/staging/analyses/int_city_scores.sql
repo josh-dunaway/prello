@@ -65,5 +65,8 @@ final_score as (
   from normalized
 )
 
-select * from final_score
+select *, city_name, latitude, longitude
+from final_score f
+left join {{ref("stg_raw__geographical_referential")}} g
+on f.municipality_code = g.municipality_code
 order by prello_score desc
